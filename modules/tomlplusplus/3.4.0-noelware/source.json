@@ -4,7 +4,7 @@
     "url": "https://github.com/marzer/tomlplusplus/archive/refs/tags/v3.4.0.tar.gz",
     "patch_strip": 0,
     "overlay": {
-        "MODULE.bazel": "",
-        "BUILD.bazel": ""
+        "BUILD.bazel": "sha256-MCwMu2av8/9Y9vSwfUydwW5pAzeQPiy+cYkKHpe97d0=",
+        "MODULE.bazel": "sha256-bV+DA7WKG1kGN0zXrEFFfyaZOTVmTzJhVi9O4/5qNnU="
     }
 }

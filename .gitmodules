@@ -1,0 +1,3 @@
+[submodule "thirdparty/bazel-central-registry"]
+	path = thirdparty/bazel-central-registry
+	url = https://github.com/bazelbuild/bazel-central-registry
