@@ -1,0 +1,7 @@
+{
+    "integrity": "",
+    "url": "https://artifacts.noelware.org/bazel-registry/violet/26.02/bazeldist.tgz",
+    "mirror_urls": [
+        "https://github.com/Noelware/violet/releases/download/26.02/bazeldist.tgz"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/marzer/tomlplusplus",
+    "maintainers": [
+        {
+            "github": "auguwu",
+            "email": "cutie@floofy.dev",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:marzer/tomlplusplus"
+    ],
+    "versions": [
+        "3.4.0-noelware"
+    ]
+}

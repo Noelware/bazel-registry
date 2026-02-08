@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/Noelware/violet",
+    "maintainers": [
+        {
+            "github": "auguwu",
+            "email": "cutie@floofy.dev",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:Noelware/violet"
+    ],
+    "versions": [
+        "26.02",
+        "26.02.01",
+        "26.02.02",
+        "26.02.03-dev",
+        "26.02.03-dev.1",
+        "26.02.03-dev.2",
+        "26.02.03"
+    ]
+}
