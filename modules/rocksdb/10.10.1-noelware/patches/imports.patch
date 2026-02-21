@@ -1,0 +1,47 @@
+diff --git a/util/simple_mixed_compressor.cc b/util/simple_mixed_compressor.cc
+index 381cf2ec5..e446377c5 100644
+--- a/util/simple_mixed_compressor.cc
++++ b/util/simple_mixed_compressor.cc
+@@ -8,7 +8,7 @@
+
+ #include "simple_mixed_compressor.h"
+
+-#include <options/options_helper.h>
++#include "options/options_helper.h"
+
+ #include "random.h"
+ #include "rocksdb/advanced_compression.h"
+diff --git a/util/string_util_test.cc b/util/string_util_test.cc
+index 54dd35ae5..8cafbc07d 100644
+--- a/util/string_util_test.cc
++++ b/util/string_util_test.cc
+@@ -7,8 +7,8 @@
+ #include "string_util.h"
+
+ #include <gtest/gtest.h>
+-#include <port/stack_trace.h>
+
++#include "port/stack_trace.h"
+ #include "test_util/testutil.h"
+
+ namespace ROCKSDB_NAMESPACE {
+@@ -33,4 +33,4 @@ int main(int argc, char** argv) {
+   ROCKSDB_NAMESPACE::port::InstallStackTraceHandler();
+   ::testing::InitGoogleTest(&argc, argv);
+   return RUN_ALL_TESTS();
+-}
+\ No newline at end of file
++}
+diff --git a/utilities/write_batch_with_index/write_batch_with_index_test.cc b/utilities/write_batch_with_index/write_batch_with_index_test.cc
+index a61de9129..d91bd4224 100644
+--- a/utilities/write_batch_with_index/write_batch_with_index_test.cc
++++ b/utilities/write_batch_with_index/write_batch_with_index_test.cc
+@@ -9,7 +9,7 @@
+
+ #include "rocksdb/utilities/write_batch_with_index.h"
+
+-#include <db/db_test_util.h>
++#include "db/db_test_util.h"
+
+ #include <map>
+ #include <memory>

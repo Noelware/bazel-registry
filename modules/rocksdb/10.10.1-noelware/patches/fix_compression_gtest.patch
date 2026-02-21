@@ -1,0 +1,15 @@
+diff --git a/util/compression_test.cc b/util/compression_test.cc
+index 06571f233..79689da2a 100644
+--- a/util/compression_test.cc
++++ b/util/compression_test.cc
+@@ -534,6 +534,10 @@ INSTANTIATE_TEST_CASE_P(
+     ::testing::Combine(::testing::ValuesIn(GetSupportedDictCompressions()),
+                        ::testing::Bool()));
+
++// When there is no supported compressions enabled, then we can allow this
++// to be uninstantiated for now.
++GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(PresetCompressionDictTest);
++
+ TEST_P(PresetCompressionDictTest, Flush) {
+   // Verifies that dictionary is generated and written during flush only when
+   // `ColumnFamilyOptions::compression` enables dictionary. Also verifies the

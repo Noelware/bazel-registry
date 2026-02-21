@@ -13,7 +13,10 @@
         "github:facebook/rocksdb"
     ],
     "versions": [
-        "10.5.1-noelware"
+        "10.5.1-noelware",
+        "10.10.1-noelware"
     ],
-    "yanked_versions": {}
+    "yanked_versions": {
+        "10.5.1-noelware": "couldn't compile very easily -- upgrade to 10.10.1-noelware instead"
+    }
 }
