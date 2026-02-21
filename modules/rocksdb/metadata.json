@@ -1,18 +1,19 @@
 {
     "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
-    "homepage": "https://github.com/marzer/tomlplusplus",
+    "homepage": "https://rocksdb.org/",
     "maintainers": [
         {
             "email": "cutie@floofy.dev",
             "github": "auguwu",
+            "github_user_id": 27751995,
             "name": "Noel Towa"
         }
     ],
     "repository": [
-        "github:marzer/tomlplusplus"
+        "github:facebook/rocksdb"
     ],
     "versions": [
-        "3.4.0-noelware",
-        "3.4.0-noelware.1"
-    ]
+        "10.5.1-noelware"
+    ],
+    "yanked_versions": {}
 }

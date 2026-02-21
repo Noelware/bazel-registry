@@ -1,0 +1,10 @@
+{
+    "integrity": "sha256-hRf2WTik+q6cz467NmMaOMHK37XvqF2acuFbnpfSUVU=",
+    "strip_prefix": "tomlplusplus-3.4.0",
+    "url": "https://github.com/marzer/tomlplusplus/archive/refs/tags/v3.4.0.tar.gz",
+    "patch_strip": 0,
+    "overlay": {
+        "BUILD.bazel": "sha256-0UwJ0TM5VvNWyYS0OONI8pYvtRYWAQC8z0JO6le1H9E=",
+        "MODULE.bazel": "sha256-qUoJqSJnBUBLLq5LtIGmDdx7cbLA1OJgzk0RPgf6Khc="
+    }
+}
