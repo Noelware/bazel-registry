@@ -14,9 +14,11 @@
     ],
     "versions": [
         "10.5.1-noelware",
-        "10.10.1-noelware"
+        "10.10.1-noelware",
+        "10.10.1-noelware.1"
     ],
     "yanked_versions": {
-        "10.5.1-noelware": "couldn't compile very easily -- upgrade to 10.10.1-noelware instead"
+        "10.5.1-noelware": "couldn't compile very easily -- upgrade to 10.10.1-noelware instead",
+        "10.10.1-noelware": "invalid patches"
     }
 }
