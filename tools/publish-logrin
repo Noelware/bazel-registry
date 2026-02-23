@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # +-----------------------------------------------------------------------+
-# This will publish a new version of Noelware.Violet (or any sub-frameworks)
+# This will publish a new version of Noel's `logrin` library
 # by:
 #
-# - Add `source.json` to `modules/$framework/$VERSION/source.json`
-# - Downloading the `MODULE.bazel` and placing it in `modules/$framework/$VERSION/MODULE.bazel`
+# - Add `source.json` to `modules/logrin/$VERSION/source.json`
+# - Downloading the `MODULE.bazel` and placing it in `modules/logrin/$VERSION/MODULE.bazel`
 # - Updating the integrity hash in `source.json`
 
 wd=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")"/.. &>/dev/null && pwd)
@@ -28,30 +28,25 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
-framework="violet"
-if ! [ -z "$2" ]; then
-    framework="violet.$2"
-fi
-
 version="$1"
-echo "Publishing new framework version $version"
+echo "Publishing new logrin version $version"
 
-! [ -d "$wd/modules/$framework/$version" ] && mkdir -p "$wd/modules/$framework/$version"
+! [ -d "$wd/modules/logrin/$version" ] && mkdir -p "$wd/modules/logrin/$version"
 
 echo "===> Adding \`source.json\` to new version"
 
-cat <<EOF > "$wd/modules/$framework/$version/source.json"
+cat <<EOF > "$wd/modules/logrin/$version/source.json"
 {
     "integrity": "",
-    "url": "https://github.com/Noelware/$framework/releases/download/$version/bazeldist.tgz"
+    "url": "https://github.com/auguwu/logrin/releases/download/$version/bazeldist.tgz"
 }
 EOF
 
 echo "===> Copying \`MODULE.bazel\` from distribution tarball..."
-curl -fsSL "https://github.com/Noelware/$framework/releases/download/$version/bazeldist.tgz" | \
-    tar -xzO ./MODULE.bazel > "modules/$framework/$version/MODULE.bazel"
+curl -fsSL "https://github.com/auguwu/logrin/releases/download/$version/bazeldist.tgz" | \
+    tar -xzO ./MODULE.bazel > "modules/logrin/$version/MODULE.bazel"
 
 echo "===> Updating source integrity..."
-"$wd/tools/call-bcr-tool" update_integrity $framework --registry="$wd" --version="$version"
+"$wd/tools/call-bcr-tool" update_integrity logrin --registry="$wd" --version="$version"
 
 echo "Done."
