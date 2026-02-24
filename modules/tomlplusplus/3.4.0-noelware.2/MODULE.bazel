@@ -1,6 +1,6 @@
 module(
     name = "tomlplusplus",
-    version = "3.4.0-noelware.1",
+    version = "3.4.0-noelware.2",
 )
 
 bazel_dep(name = "rules_cc", version = "0.2.16")
