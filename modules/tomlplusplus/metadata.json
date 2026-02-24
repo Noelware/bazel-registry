@@ -13,6 +13,10 @@
     ],
     "versions": [
         "3.4.0-noelware",
-        "3.4.0-noelware.1"
-    ]
+        "3.4.0-noelware.1",
+        "3.4.0-noelware.2"
+    ],
+    "yanked_versions": {
+        "3.4.0-noelware.1": "headers are misconfigured"
+    }
 }
