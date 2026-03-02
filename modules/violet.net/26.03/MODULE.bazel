@@ -1,0 +1,69 @@
+# 🌺💜 Violet.Networking: C++20 library that provides networking primitives
+# Copyright (c) 2026 Noelware, LLC. <team@noelware.org>, et al.
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+module(
+    name = "violet.net",
+    version = "26.03",
+    compatibility_level = 0,
+    repo_name = "org_noelware_violet_net",
+)
+
+bazel_dep(name = "bazel_skylib", version = "1.9.0")
+bazel_dep(name = "platforms", version = "1.0.0")
+bazel_dep(name = "rules_cc", version = "0.2.17")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
+bazel_dep(name = "curl", version = "8.11.0.bcr.5")
+bazel_dep(name = "zlib", version = "1.3.2")
+bazel_dep(name = "zstd", version = "1.5.7.bcr.1")
+bazel_dep(name = "abseil-cpp", version = "20260107.1", repo_name = "absl")
+bazel_dep(name = "violet", version = "26.03.08")
+bazel_dep(name = "logrin", version = "26.02.04")
+bazel_dep(name = "rules_rust", version = "0.69.0")
+
+## Configure Rust toolchain
+rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+rust.toolchain(
+    edition = "2024",
+    sha256s = {
+        "2025-02-06/cargo-nightly-x86_64-unknown-linux-gnu.tar.xz": "acd3d3c1722183917859039645836084beac939c4ccc00dfcee095d308980dbb",
+        "2025-02-06/clippy-nightly-x86_64-unknown-linux-gnu.tar.xz": "82016d98fe14300bb9ae8d034dc98677ea06ef8115ddb703d56c697392f29cce",
+        "2025-02-06/llvm-tools-nightly-x86_64-unknown-linux-gnu.tar.xz": "40954e1f4aee937aa71dfe2c5ae4366eb5057b78586da35dfcd480612371f3f2",
+        "2025-02-06/rust-std-nightly-x86_64-unknown-linux-gnu.tar.xz": "5e23b4dc43ac81f7b85ab346337590a0bc6ebe7ba0d06990f81ec238dc782003",
+        "2025-02-06/rustc-nightly-x86_64-unknown-linux-gnu.tar.xz": "7fd3955cc64b9b4a2edd45e365988c9f8cd20defef80d0d785606b554f617d39",
+    },
+    versions = [
+        # keep in-sync with `rust-toolchain.toml`
+        "nightly/2025-02-06",
+    ],
+)
+
+## Configure crate dependencies
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.spec(
+    package = "url",
+    version = "2.5.7",
+)
+crate.spec(
+    package = "libc",
+    version = "0.2.180",
+)
+crate.from_specs()
+use_repo(crate, "crates")

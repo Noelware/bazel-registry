@@ -34,12 +34,12 @@ if ! [ -z "$2" ]; then
 fi
 
 repository="Noelware/$framework"
-if [ "$framework" -eq "violet.net" ]; then
+if [ "$framework" == "violet.net" ]; then
     repository="Noelware/Violet.Networking"
 fi
 
 version="$1"
-echo "Publishing new framework version $version"
+echo "Publishing new framework version $version     [repository=$repository]"
 
 ! [ -d "$wd/modules/$framework/$version" ] && mkdir -p "$wd/modules/$framework/$version"
 
@@ -55,6 +55,8 @@ EOF
 echo "===> Copying \`MODULE.bazel\` from distribution tarball..."
 curl -fsSL "https://github.com/$repository/releases/download/$version/bazeldist.tgz" | \
     tar -xzO ./MODULE.bazel > "modules/$framework/$version/MODULE.bazel"
+
+sed -i '/^archive_override(/,/^)/d' "modules/$framework/$version/MODULE.bazel"
 
 echo "===> Updating source integrity..."
 "$wd/tools/call-bcr-tool" update_integrity $framework --registry="$wd" --version="$version"
