@@ -46,6 +46,8 @@ echo "===> Copying \`MODULE.bazel\` from distribution tarball..."
 curl -fsSL "https://github.com/auguwu/logrin/releases/download/$version/bazeldist.tgz" | \
     tar -xzO ./MODULE.bazel > "modules/logrin/$version/MODULE.bazel"
 
+sed -i '/^archive_override(/,/^)/d' "modules/logrin/$version/MODULE.bazel"
+
 echo "===> Updating source integrity..."
 "$wd/tools/call-bcr-tool" update_integrity logrin --registry="$wd" --version="$version"
 
