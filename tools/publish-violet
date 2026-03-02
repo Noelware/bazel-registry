@@ -33,6 +33,11 @@ if ! [ -z "$2" ]; then
     framework="violet.$2"
 fi
 
+repository="Noelware/$framework"
+if [ "$framework" -eq "violet.net" ]; then
+    repository="Noelware/Violet.Networking"
+fi
+
 version="$1"
 echo "Publishing new framework version $version"
 
@@ -43,12 +48,12 @@ echo "===> Adding \`source.json\` to new version"
 cat <<EOF > "$wd/modules/$framework/$version/source.json"
 {
     "integrity": "",
-    "url": "https://github.com/Noelware/$framework/releases/download/$version/bazeldist.tgz"
+    "url": "https://github.com/$repository/releases/download/$version/bazeldist.tgz"
 }
 EOF
 
 echo "===> Copying \`MODULE.bazel\` from distribution tarball..."
-curl -fsSL "https://github.com/Noelware/$framework/releases/download/$version/bazeldist.tgz" | \
+curl -fsSL "https://github.com/$repository/releases/download/$version/bazeldist.tgz" | \
     tar -xzO ./MODULE.bazel > "modules/$framework/$version/MODULE.bazel"
 
 echo "===> Updating source integrity..."
