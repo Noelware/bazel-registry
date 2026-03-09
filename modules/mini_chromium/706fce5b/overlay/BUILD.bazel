@@ -1,0 +1,248 @@
+load("@bazel_skylib//lib:selects.bzl", "selects")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+config_setting(
+    name = "is_dbg",
+    values = {
+        "compilation_mode": "dbg",
+    },
+    visibility = [":__pkg__"],
+)
+
+config_setting(
+    name = "is_release",
+    values = {
+        "compilation_mode": "opt",
+    },
+    visibility = [":__pkg__"],
+)
+
+config_setting(
+    name = "clang_dbg",
+    values = {
+        "compilation_mode": "dbg",
+        "compiler": "clang",
+    },
+)
+
+config_setting(
+    name = "clang-cl_dbg",
+    values = {
+        "compilation_mode": "dbg",
+        "compiler": "clang-cl",
+    },
+)
+
+config_setting(
+    name = "gcc_dbg",
+    values = {
+        "compilation_mode": "dbg",
+        "compiler": "gcc",
+    },
+)
+
+config_setting(
+    name = "linux_opt",
+    constraint_values = ["@platforms//os:linux"],
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+config_setting(
+    name = "macos_opt",
+    constraint_values = ["@platforms//os:macos"],
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+config_setting(
+    name = "ios_opt",
+    constraint_values = ["@platforms//os:ios"],
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+config_setting(
+    name = "windows_opt",
+    constraint_values = ["@platforms//os:windows"],
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+config_setting(
+    name = "windows_msvc-cl_opt",
+    constraint_values = ["@platforms//os:windows"],
+    flag_values = {
+        "@rules_cc//cc/compiler": "msvc-cl",
+    },
+    values = {
+        "compilation_mode": "opt",
+    },
+)
+
+filegroup(
+    name = "base_srcs",
+    srcs = glob(
+        [
+            "base/debug/*.cc",
+            "base/files/*.cc",
+            "base/process/*.cc",
+            "base/strings/*.cc",
+            "base/threading/*.cc",
+            "base/synchronization/*.cc",
+            "base/*.cc",
+        ],
+        exclude = [
+            "**/*_posix.cc",
+            "**/*_win.cc",
+        ],
+    ),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "posix_srcs",
+    srcs = glob([
+        "base/**/*_posix.cc",
+        "base/posix/*.cc",
+    ]),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "windows_srcs",
+    srcs = glob(["base/**/*_win.cc"]),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "apple_srcs",
+    srcs = glob([
+        "base/apple/*.cc",
+        "base/**/*.mm",
+    ]),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "base_hdrs",
+    srcs = glob(
+        ["base/**/*.h"],
+        exclude = [
+            "**/*_posix.h",
+            "**/*_win.h",
+        ],
+    ),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "posix_hdrs",
+    srcs = glob(["base/**/*_posix.h"]),
+    visibility = [":__pkg__"],
+)
+
+filegroup(
+    name = "windows_hdrs",
+    srcs = glob(["base/**/*_win.h"]),
+    visibility = [":__pkg__"],
+)
+
+cc_library(
+    name = "build_config",
+    hdrs = [
+        "build/build_config.h",
+        "build/buildflag.h",
+    ],
+    visibility = [":__pkg__"],
+)
+
+cc_library(
+    name = "icu",
+    srcs = glob(["base/third_party/icu/*.cc"]),
+    hdrs = glob(["base/third_party/icu/*.h"]),
+    visibility = [":__pkg__"],
+)
+
+cc_library(
+    name = "mini_chromium",
+    srcs = [":base_srcs"] + select({
+        "@platforms//os:linux": [":posix_srcs"],
+        "@platforms//os:macos": [
+            ":apple_srcs",
+            ":posix_srcs",
+        ],
+        "@platforms//os:windows": [":windows_srcs"],
+        "//conditions:default": [],
+    }),
+    hdrs = [":base_hdrs"] + select({
+        "@platforms//os:linux": [":posix_hdrs"],
+        "@platforms//os:macos": [":posix_hdrs"],
+        "@platforms//os:windows": [":windows_hdrs"],
+        "//conditions:default": [],
+    }),
+    copts = selects.with_or({
+        ("@rules_cc//cc/compiler:clang", "@rules_cc//cc/compiler:gcc", "@rules_cc//cc/compiler:clang-cl"): [
+            "-std=c++23",
+            "-Wall",
+            "-Werror",
+            "-Wextra",
+            "-fno-exceptions",
+            "-fno-rtti",
+            "-fvisibility=hidden",
+
+            # needed because of:
+            # base/debug/alias.cc: In function 'void base::debug::Alias(const void*)':
+            # 16 | void Alias(const void* var) {
+            #    |            ~~~~~~~~~~~~^~~
+            "-Wno-unused-parameter",
+        ],
+        "@rules_cc//cc/compiler:msvc-cl": [
+            "/std:c++23preview",
+            "/DNOMINMAX",
+            "/DUNICODE",
+            "/DWIN32_LEAN_AND_MEAN",
+            "/D_CRT_SECURE_NO_WARNINGS",
+            "/D_HAS_EXCEPTIONS=0",
+            "/D_UNICODE",
+            "/FS",
+            "/W4",
+            "/WX",
+            "/Zi",
+            "/bigobj",
+        ],
+        "//conditions:default": [],
+    }) + selects.with_or({
+        (":clang-cl_dbg", ":clang_dbg", ":gcc_dbg"): ["-g"],
+        "//conditions:default": [],
+    }) + selects.with_or({
+        (":linux_opt", ":macos_opt", ":ios_opt"): ["-O3"],
+        ":windows_msvc-cl_opt": [
+            "/O2",
+            "/Ob2",
+            "/Oy-",
+            "/Zc:inline",
+            "/GL",
+            "/d2Zi+",
+        ],
+        "//conditions:default": [],
+    }) + select({
+        "@rules_cc//cc/compiler:clang": [
+            "-Wexit-time-destructors",
+            "-Wimplicit-fallthrough",
+        ],
+        "//conditions:default": [],
+    }),
+    defines = select({
+        "@platforms//os:linux": ["_FILE_OFFSET_BITS=64"],
+        "//conditions:default": [],
+    }),
+    deps = [
+        ":build_config",
+        ":icu",
+    ],
+)

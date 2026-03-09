@@ -1,0 +1,10 @@
+{
+    "integrity": "sha256-0ayrsAmbAKlXK7Ri0kSfrHZaZ229lbvRri3cq5bnGeo=",
+    "strip_prefix": "mini_chromium-706fce5b1a280a6f2eea69040f67847f9acb65ff",
+    "url": "https://github.com/chromium/mini_chromium/archive/706fce5b1a280a6f2eea69040f67847f9acb65ff.tar.gz",
+    "patch_strip": 0,
+    "overlay": {
+        "BUILD.bazel": "sha256-OFHLWYLJbpQ7XXtmw+hnS3OIQATTd/8KlCojPlnsAxk=",
+        "MODULE.bazel": "sha256-tSDQB7dftGn4KAy1tY4gSKSQeOwHQSFEWJBKiOPTRYM="
+    }
+}

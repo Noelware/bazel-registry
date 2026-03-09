@@ -1,0 +1,18 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/chromium/mini_chromium",
+    "maintainers": [
+        {
+            "email": "cutie@floofy.dev",
+            "github": "auguwu",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:chromium/mini_chromium"
+    ],
+    "versions": [
+        "706fce5b"
+    ],
+    "yanked_versions": {}
+}
