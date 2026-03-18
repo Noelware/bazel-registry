@@ -13,9 +13,11 @@
     ],
     "versions": [
         "26.04",
-        "26.04.noelware.1"
+        "26.04.noelware.1",
+        "26.04.noelware.2"
     ],
     "yanked_versions": {
-        "26.04": "sha256 integrity was wrong, use `26.04.noelware.1`"
+        "26.04": "sha256 integrity was wrong, use `26.04.noelware.1`",
+        "26.04.noelware.1": "version in `MODULE.bazel` was wrong"
     }
 }
