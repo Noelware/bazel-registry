@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/Noelware/Violet.Subprocess",
+    "maintainers": [
+        {
+            "email": "cutie@floofy.dev",
+            "github": "auguwu",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:Noelware/Violet.Subprocess"
+    ],
+    "versions": [
+        "26.04"
+    ]
+}
