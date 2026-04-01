@@ -32,13 +32,16 @@ jobs:
                 runner: [ubuntu-latest, macos-latest, windows-latest]
                 module: ${{fromJson(needs.validate-module.outputs.modules)}}
         steps:
+            - name: Enable Symlinks (Windows)
+              if: runner.os == 'Windows'
+              run: git config --global core.symlinks true
+
             - uses: actions/checkout@v6
               with:
                 submodules: recursive
 
             # Check if we can use `bazel mod` commands on the specified module
-            - run: .ci/check-module.sh ${{matrix.module.name}} ${{matrix.module.version}}
-              shell: bash
+            - run: ".ci/check-module.${{runner.os == 'Windows' && 'ps1' || 'sh'}} ${{matrix.module.name}} ${{matrix.module.version}}"
 
             # Run the presubmit.yml tasks (build/test targets)
             - run: ./tools/call-bcr-tool setup_presubmit_repos --module="${{matrix.module.name}}@${{matrix.module.version}}"

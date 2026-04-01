@@ -31,4 +31,4 @@ echo "==> trigger: \`bazel fetch\`"
 bazel fetch --registry=https://bcr.bazel.build --registry="file://$wd" >/dev/null || exit 1
 
 echo "==> trigger: \`bazel mod graph\`"
-bazel mod resolve --registry=https://bcr.bazel.build --registry="file://$wd" >/dev/null || exit 1
+bazel mod resolve --registry=https://bcr.bazel.build --registry="file://$wd" --extension_info=all >/dev/null || exit 1
