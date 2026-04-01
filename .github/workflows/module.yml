@@ -7,15 +7,11 @@ on:
             - ready_for_review
 jobs:
     validate-module:
-        name: "Validate [Bazel v${{matrix.bazel}}]"
+        name: "Validate"
         runs-on: ubuntu-latest
         outputs:
             modules: ${{steps.modified.outputs.modules}}
-            has-changes: ${{steps.modified.outputs.has_changes}}
-        strategy:
-            fail-fast: true
-            matrix:
-                bazel: ["7.7.1", "8.6.0", "9.0.1"]
+            has_changes: ${{steps.modified.outputs.has_changes}}
         steps:
             - uses: actions/checkout@v6
               with:
@@ -28,7 +24,7 @@ jobs:
         name: "Check ${{matrix.module.name}}@${{matrix.module.version}} [${{matrix.runner}} / Bazel v${{matrix.bazel}}]"
         runs-on: ${{matrix.runner}}
         needs: [validate-module]
-        if: needs.validate-module.outputs.has-changes == 'true'
+        if: needs.validate-module.outputs.has_changes == 'true'
         strategy:
             fail-fast: true
             matrix:

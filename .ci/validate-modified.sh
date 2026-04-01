@@ -22,12 +22,12 @@ json=$(echo "$changed" | jq -R -s -c '
 
 # Add `modules` and `has_changes` to `$GITHUB_OUTPUT` if we are on GitHub Actions.
 if [ -n "$GITHUB_OUTPUT" ]; then
-    echo "modules=$json" >> $GITHUB_OUTPUT
+    echo "modules=$json" >> "$GITHUB_OUTPUT"
 
     if [ "$json" == "[]" ]; then
-        echo "has_changes=false" >> $GITHUB_OUTPUT
+        echo "has_changes=false" >> "$GITHUB_OUTPUT"
     else
-        echo "has_changes=true" >> $GITHUB_OUTPUT
+        echo "has_changes=true" >> "$GITHUB_OUTPUT"
     fi
 fi
 
@@ -51,7 +51,7 @@ echo "$changed" | while read -r module version; do
         echo "failed to check module $module@$version:" >> "$ERROR_LOG"
         cat output.log >> "$ERROR_LOG"
         echo -e '\n---\n' >> "$ERROR_LOG"
-        FAILED=$((FAILED + 1))
+        failed=$((failed + 1))
     fi
 done
 
