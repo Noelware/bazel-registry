@@ -21,31 +21,27 @@ jobs:
               with:
                 submodules: recursive
                 fetch-depth: 0
-            - uses: actions/cache@v5
-              with:
-                key: bazel-cache-${{matrix.bazel}}
-                restore-keys: bazel-cache-
-                path: |
-                    ~/.cache/bazel
-                    ~/.cache/bazelisk
+
             - run: .ci/validate-modified.sh
               id: modified
-    # check:
-    #     name: "Check [${{matrix.runner}} / Bazel v${{matrix.bazel}}]"
-    #     runs-on: ${{matrix.runner}}
-    #     strategy:
-    #         fail-fast: true
-    #         matrix:
-    #             bazel: ["7.7.1", "8.6.0", "9.0.1"]
-    #     steps:
-    #         - uses: actions/checkout@v6
-    #           with:
-    #             submodules: recursive
-    #         - uses: actions/cache@v5
-    #           with:
-    #             key: bazel-cache-${{matrix.bazel}}
-    #             restore-keys: bazel-cache-
-    #             path: |
-    #                 ~/.cache/bazel
-    #                 ~/.cache/bazelisk
-    #         - run: .ci/check-module.sh
+    check:
+        name: "Check ${{matrix.module.name}}@${{matrix.module.version}} [${{matrix.runner}} / Bazel v${{matrix.bazel}}]"
+        runs-on: ${{matrix.runner}}
+        needs: [validate-module]
+        if: needs.validate-module.outputs.has-changes == 'true'
+        strategy:
+            fail-fast: true
+            matrix:
+                bazel: ["7.7.1", "8.6.0", "9.0.1"]
+                runner: [ubuntu-latest, macos-latest, windows-latest]
+                module: ${{fromJson(needs.validate-module.outputs.modules)}}
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                submodules: recursive
+
+            # Check if we can use `bazel mod` commands on the specified module
+            - run: .ci/check-module.sh ${{matrix.module.name}} ${{matrix.module.version}}
+
+            # Run the presubmit.yml tasks (build/test targets)
+            - run: ./tools/call-bcr-tool setup_presubmit_repos --module="${{matrix.module.name}}@${{matrix.module.version}}"

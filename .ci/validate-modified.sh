@@ -55,6 +55,6 @@ echo "$changed" | while read -r module version; do
     fi
 done
 
-if [ $FAILED -ne 0 ]; then
+if [ $failed -ne 0 ]; then
     exit 1
 fi
