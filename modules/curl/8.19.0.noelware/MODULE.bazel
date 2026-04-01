@@ -19,3 +19,7 @@ bazel_dep(name = "mbedtls", version = "3.6.5")
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "boringssl", version = "0.20260327.0")
 bazel_dep(name = "openssl", version = "3.5.5.bcr.2")
+
+# Force `libpfm` dependency to be `4.13.0`. This is required by `google_benchmark` for
+# `boringssl`.
+bazel_dep(name = "libpfm", version = "4.13.0")
