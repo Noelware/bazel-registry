@@ -12,7 +12,7 @@ if (-not (Get-Command "bazel" -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-$directory = if ($env:GITHUB_WORKSPACE) {
+$wd = if ($env:GITHUB_WORKSPACE) {
     $env:GITHUB_WORKSPACE
 } else {
     Get-Location
