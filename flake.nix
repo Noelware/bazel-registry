@@ -27,6 +27,7 @@
           bazel_8
           bazel-buildtools
           python3
+          openjdk
         ];
       };
     });
