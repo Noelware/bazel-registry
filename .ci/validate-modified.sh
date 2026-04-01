@@ -17,7 +17,10 @@ changed=$(git diff --name-only origin/$base...HEAD \
 json=$(echo "$changed" | jq -R -s -c '
     split("\n")
     | map(select(length > 0) | split(" "))
-    | map({"name": ., "version": .})
+    | map({
+        "name": .[0],
+        "version": .[1]
+      })
 ')
 
 # Add `modules` and `has_changes` to `$GITHUB_OUTPUT` if we are on GitHub Actions.
