@@ -10,7 +10,7 @@ echo "===> Working Directory: $wd"
 
 git fetch origin "$base" --depth=1 >/dev/null 2>&1 || true
 changed=$(git diff --name-only origin/$base...HEAD \
-    | grep '^modules/' \
+    | grep '^modules/.*/.*/\(MODULE.bazel\|source.json\)' \
     | awk -F'/' '{print $2, $3}' \
     | sort -u)
 
