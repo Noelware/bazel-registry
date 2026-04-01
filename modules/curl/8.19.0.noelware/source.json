@@ -4,6 +4,6 @@
     "url": "https://github.com/curl/curl/releases/download/curl-8_19_0/curl-8.19.0.tar.gz",
     "overlay": {
         "BUILD.bazel": "sha256-bSpaHrjgGESdFLDLDcwVYJHxTL84WmlyncW4LWoX48E=",
-        "MODULE.bazel": "sha256-KEuMVE7YDLm/KjmDdhuLqrWrpgche8T20oQMO2pkX9s="
+        "MODULE.bazel": "sha256-E64Mu+YUJ6eKuUV9cAgb61qAIXLKbua8O/sit33lkPg="
     }
 }

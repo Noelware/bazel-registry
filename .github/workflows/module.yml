@@ -38,6 +38,8 @@ jobs:
 
             # Check if we can use `bazel mod` commands on the specified module
             - run: .ci/check-module.sh ${{matrix.module.name}} ${{matrix.module.version}}
+              shell: bash
 
             # Run the presubmit.yml tasks (build/test targets)
             - run: ./tools/call-bcr-tool setup_presubmit_repos --module="${{matrix.module.name}}@${{matrix.module.version}}"
+              shell: bash
