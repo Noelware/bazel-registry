@@ -246,6 +246,10 @@ _BASE_CURL_COPTS = [
     "-DUSE_THREADS_POSIX=1",
     "-DUSE_UNIX_SOCKETS=1",
 
+    # Add -D_POSIX_C_SOURCE to all curl dependencies as `#include <netdb.h>` is required
+    # so that `struct addrinfo` can be fixed.
+    "-D_POSIX_C_SOURCE=200809L",
+
     # Extra defines needed by curl
     "-DBUILDING_LIBCURL",
     # These 3 all have to be set correctly
