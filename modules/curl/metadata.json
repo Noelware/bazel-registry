@@ -1,0 +1,18 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/curl/curl",
+    "maintainers": [
+        {
+            "email": "cutie@floofy.dev",
+            "github": "auguwu",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:curl/curl"
+    ],
+    "versions": [
+        "8.19.0.noelware"
+    ],
+    "yanked_versions": {}
+}

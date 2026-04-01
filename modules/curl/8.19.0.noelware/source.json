@@ -1,0 +1,9 @@
+{
+    "integrity": "sha256-KiwR20wSJpGqI7Q2O+/aG/2AF3C/6/QeHSHO5PKrD3E=",
+    "strip_prefix": "curl-8.19.0",
+    "url": "https://github.com/curl/curl/releases/download/curl-8_19_0/curl-8.19.0.tar.gz",
+    "overlay": {
+        "BUILD.bazel": "sha256-lkuSPjHUxkOP4Ic1u2N2Qi2c47DpobbjjCMUBvsBTw4=",
+        "MODULE.bazel": "sha256-fKvxrQoIYVqLhAqBk2gXtCP32SmVVPKcp+k6Rfl6OCs="
+    }
+}
