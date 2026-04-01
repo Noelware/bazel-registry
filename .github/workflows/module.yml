@@ -5,6 +5,8 @@ on:
             - opened
             - synchronize
             - ready_for_review
+        paths:
+            - 'modules/**'
 jobs:
     validate-module:
         name: "Validate"
