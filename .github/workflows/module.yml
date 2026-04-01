@@ -34,9 +34,11 @@ jobs:
                 runner: [ubuntu-latest, macos-latest, windows-latest]
                 module: ${{fromJson(needs.validate-module.outputs.modules)}}
         steps:
-            - name: Enable Symlinks (Windows)
+            - name: Enable Symlinks and use Unix line endings (Windows)
               if: runner.os == 'Windows'
-              run: git config --global core.symlinks true
+              run: |
+                git config --global core.symlinks true
+                git config --global core.autocrlf false
 
             - uses: actions/checkout@v6
               with:
