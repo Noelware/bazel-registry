@@ -30,6 +30,8 @@ done
     exit 1
 }
 
+export USE_BAZEL_VERSION=$(bazel --version | sed 's/bazel //;s/-.*//')
+
 pushd thirdparty/bazel-central-registry
 
 bazel run //tools:$1 -- ${@:2}
