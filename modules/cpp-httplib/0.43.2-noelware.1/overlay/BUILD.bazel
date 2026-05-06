@@ -1,0 +1,237 @@
+load("@bazel_skylib//lib:selects.bzl", "selects")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(
+    default_visibility = ["//visibility:public"],
+    features = ["parse_headers"],
+)
+
+bool_flag(
+    name = "macosx_automatic_root_certificates",
+    build_setting_default = True,
+)
+
+bool_flag(
+    name = "exceptions",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "openssl",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "boringssl",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "mbedtls",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "gzip",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "brotli",
+    build_setting_default = False,
+)
+
+bool_flag(
+    name = "zstd",
+    build_setting_default = False,
+)
+
+config_setting(
+    name = "with_exceptions",
+    flag_values = {
+        ":exceptions": "True",
+    },
+)
+
+config_setting(
+    name = "with_no_exceptions",
+    flag_values = {
+        ":exceptions": "False",
+    },
+)
+
+selects.config_setting_group(
+    name = "exceptions_clang",
+    match_all = [
+        ":with_exceptions",
+        "@rules_cc//cc/compiler:clang",
+    ],
+)
+
+selects.config_setting_group(
+    name = "exceptions_gcc",
+    match_all = [
+        ":with_exceptions",
+        "@rules_cc//cc/compiler:gcc",
+    ],
+)
+
+selects.config_setting_group(
+    name = "no_exceptions_clang",
+    match_all = [
+        ":with_no_exceptions",
+        "@rules_cc//cc/compiler:clang",
+    ],
+)
+
+selects.config_setting_group(
+    name = "no_exceptions_gcc",
+    match_all = [
+        ":with_no_exceptions",
+        "@rules_cc//cc/compiler:gcc",
+    ],
+)
+
+selects.config_setting_group(
+    name = "no_exceptions_msvc",
+    match_all = [
+        ":with_no_exceptions",
+        "@rules_cc//cc/compiler:msvc-cl",
+    ],
+)
+
+selects.config_setting_group(
+    name = "no_exceptions_clang_cl",
+    match_all = [
+        ":with_no_exceptions",
+        "@rules_cc//cc/compiler:clang-cl",
+    ],
+)
+
+config_setting(
+    name = "disable_macosx_automatic_root_certificates",
+    flag_values = {
+        ":macosx_automatic_root_certificates": "False",
+    },
+)
+
+config_setting(
+    name = "with_openssl",
+    flag_values = {
+        ":openssl": "True",
+    },
+)
+
+config_setting(
+    name = "with_boringssl",
+    flag_values = {
+        ":boringssl": "True",
+    },
+)
+
+config_setting(
+    name = "with_mbedtls",
+    flag_values = {
+        ":mbedtls": "True",
+    },
+)
+
+config_setting(
+    name = "with_gzip",
+    flag_values = {
+        ":gzip": "True",
+    },
+)
+
+config_setting(
+    name = "with_brotli",
+    flag_values = {
+        ":brotli": "True",
+    },
+)
+
+config_setting(
+    name = "with_zstd",
+    flag_values = {
+        ":zstd": "True",
+    },
+)
+
+py_binary(
+    name = "split_httplib_script",
+    srcs = ["split.py"],
+    data = ["httplib.h"],
+    main = "split.py",
+    visibility = [":__pkg__"],
+)
+
+genrule(
+    name = "split_httplib",
+    srcs = ["httplib.h"],
+    outs = [
+        "out/httplib.h",
+        "out/httplib.cc",
+    ],
+    cmd = "$(location :split_httplib_script) -o $$(dirname \"$(location out/httplib.h)\")",
+    tools = [":split_httplib_script"],
+    visibility = [":__pkg__"],
+)
+
+cc_library(
+    name = "httplib",
+    srcs = ["out/httplib.cc"],
+    hdrs = ["out/httplib.h"],
+    copts = selects.with_or({
+        (":exceptions_clang", ":exceptions_gcc"): ["-fexceptions"],
+        (":no_exceptions_clang", ":no_exceptions_gcc"): ["-fno-exceptions"],
+        (":no_exceptions_msvc", ":no_exceptions_clang_cl"): ["/EHsc"],
+        "//conditions:default": [],
+    }),
+    defines = select({
+        ":with_no_exceptions": ["CPPHTTPLIB_NO_EXCEPTIONS"],
+        "//conditions:default": [],
+    }) + selects.with_or({
+        (":with_openssl", ":with_boringssl"): ["CPPHTTPLIB_OPENSSL_SUPPORT"],
+        ":with_mbedtls": ["CPPHTTPLIB_MBEDTLS_SUPPORT"],
+        "//conditions:default": [],
+    }) + select({
+        ":with_gzip": ["CPPHTTPLIB_ZLIB_SUPPORT"],
+        "//conditions:default": [],
+    }) + select({
+        ":with_brotli": ["CPPHTTPLIB_BROTLI_SUPPORT"],
+        "//conditions:default": [],
+    }) + select({
+        ":with_zstd": ["CPPHTTPLIB_ZSTD_SUPPORT"],
+        "//conditions:default": [],
+    }) + select({
+        ":disable_macosx_automatic_root_certificates": ["CPPHTTPLIB_DISABLE_MACOSX_AUTOMATIC_ROOT_CERTIFICATES"],
+        "//conditions:default": [],
+    }),
+    strip_include_prefix = "out",
+    deps = select({
+        ":with_boringssl": ["@boringssl//:ssl"],
+        ":with_mbedtls": ["@mbedtls"],
+        ":with_openssl": ["@openssl//:ssl"],
+        "//conditions:default": [],
+    }) + select({
+        ":with_gzip": ["@zlib"],
+        "//conditions:default": [],
+    }) + select({
+        ":with_brotli": [
+            "@brotli//:brotlidec",
+            "@brotli//:brotlienc",
+        ],
+        "//conditions:default": [],
+    }) + select({
+        ":with_zstd": ["@zstd"],
+        "//conditions:default": [],
+    }),
+)
+
+alias(
+    name = "cpp-httplib",
+    actual = ":httplib",
+    visibility = ["//visibility:public"],
+)

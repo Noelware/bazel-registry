@@ -12,7 +12,10 @@
         "github:yhirose/cpp-httplib"
     ],
     "versions": [
-        "0.43.2-noelware"
+        "0.43.2-noelware",
+        "0.43.2-noelware.1"
     ],
-    "yanked_versions": {}
+    "yanked_versions": {
+        "0.43.2-noelware": "not buildable; use `0.43.2-noelware`"
+    }
 }
