@@ -12,7 +12,10 @@
         "github:chromium/mini_chromium"
     ],
     "versions": [
+        "0.0.0-706fce5b",
         "706fce5b"
     ],
-    "yanked_versions": {}
+    "yanked_versions": {
+        "706fce5b": "use `0.0.0-706fce5b` as that'll be the new version format for now on"
+    }
 }
