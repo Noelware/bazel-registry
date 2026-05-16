@@ -1,6 +1,6 @@
 module(
     name = "mini_chromium",
-    version = "0.0.0+706fce5b",
+    version = "0.0.0-706fce5b",
     bazel_compatibility = [">=7.2.1"],  # for `overlay/` directory
 )
 
