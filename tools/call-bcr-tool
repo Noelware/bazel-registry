@@ -32,8 +32,17 @@ done
 
 export USE_BAZEL_VERSION=$(bazel --version | sed 's/bazel //;s/-.*//')
 
+bazelflags=()
+
+# macOS: ensure that it uses the system Xcode for `rules_python` (force-use as when `direnv`'d on macOS,
+# `xcode-select -p` returns the Nix-managed SDK. I'm not sure if this is still right, but idk.)
+if [[ "$(uname)" == "Darwin" ]]; then
+    export DEVELOPER_DIR="/Applications/Xcode.app/Contents/Developer"
+    if [[ ! -d "$DEVELOPER_DIR" ]]; then
+        export DEVELOPER_DIR="/Library/Developer/CommandLineTools"
+    fi
+fi
+
 pushd thirdparty/bazel-central-registry
-
 bazel run //tools:$1 -- ${@:2}
-
 popd
