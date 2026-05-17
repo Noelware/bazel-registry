@@ -1,0 +1,32 @@
+{
+    "integrity": "sha256-dPZqpkDsW4/zFjdJFAK9i/68bgsPAG+aXY7AUAloRmk=",
+    "strip_prefix": "mini_chromium-b050c9d95bba96ff40961eefede00d365a0890d7",
+    "url": "https://github.com/chromium/crashpad/archive/b050c9d95bba96ff40961eefede00d365a0890d7.tar.gz",
+    "patch_strip": 1,
+    "patches": {
+        "0001-Fix-Linux-client-test.patch": "sha256-IQmhNbQmrc8bOk65951Ufa1HviZrNf4aEUGjL73jK9Q="
+    },
+    "overlay": {
+        "BUILD.bazel": "sha256-k+EHHOMrkkw7YDgXnZRnH+BnyeCIuG8EK6Ii5RJln+Y=",
+        "MODULE.bazel": "sha256-fJWlRbez9JkmiRpzTEatJvThxktxs5w2GlBMhSFpkVY=",
+        "build/BUILD.bazel": "sha256-Swc7fxqnbxat54s6uY+mg8u+O5hXsR74B0vldb4sH/I=",
+        "build/cc.bzl": "sha256-e1Bbv0PYVj24PGNIq43dUZF9WpsiLF4uxbcBhkppEYc=",
+        "build/mig/BUILD.bazel": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",
+        "build/mig/sdk.bzl": "sha256-BsWXmeCelANMp1B2UPvyhPbZU2iLBK0ZGEKKadDDyEw=",
+        "build/mig.bzl": "sha256-4wsZi4FI5Xny59jqGUG6ctnceaKI2cq/DZVQi0JmRRg=",
+        "client/BUILD.bazel": "sha256-jKMqKUMMLVsV6gHps+G4Xbbl2HHVGhN6fiBjQMP7cVc=",
+        "compat/BUILD.bazel": "sha256-vPY8OBc2LoL57BTh2xyEwBCicTCw/sOZq8P30ErFeDM=",
+        "handler/BUILD.bazel": "sha256-XVz/yxvEFSk0ca0Gonn15fee9roIr4FjkWM9C62x1Fs=",
+        "minidump/BUILD.bazel": "sha256-DLkbUP6yx4ZOwimNBExMh9tYKCRlLai5iOMdr9ewS8g=",
+        "snapshot/BUILD.bazel": "sha256-xnCb1GLkk/SH4eLODBoOlR+G+s/9w2nUfe27W6nnw7w=",
+        "test/BUILD.bazel": "sha256-66zbHPzvebA/GRbeR6BQ/23K3eYxiaD+C+CyyRE8nzA=",
+        "third_party/cpp-httplib/BUILD.bazel": "sha256-3iom4psuQ/NqOjZFh0tAr/8AhdFilCsKfd6CJkGxmKg=",
+        "third_party/getopt/BUILD.bazel": "sha256-pIdt+974wR40hjP6s3Xn3Nzl1uz6rwELvHcsvQ1r4Ek=",
+        "third_party/lss/BUILD.bazel": "sha256-rc2zaSEJ2jJtsPjfPzWLQU85cBI+Smph9oWQhkaAUJE=",
+        "third_party/lss/extension.bzl": "sha256-yA9qoaXvSb7BKxVJHl6G15qNZWC9i/dpffRkNRuxiNs=",
+        "third_party/xnu/BUILD.bazel": "sha256-qsvVjW7MGxHZnPQJexf50vpTvFRIOtq0bWKrln0UoCQ=",
+        "third_party/zlib/BUILD.bazel": "sha256-RuvhWhxUVIsWTZXYiWxTWrK5Shtgbghe8tfC1pnD2Vo=",
+        "tools/BUILD.bazel": "sha256-WiUyLbpqdvsK4g88UMtzbw97MUs+M3j+371ZQCEd76U=",
+        "util/BUILD.bazel": "sha256-QoaynSxELSJo3SR2u/6dfyGVCFSYJZpyr9qwyf7DcJQ="
+    }
+}
