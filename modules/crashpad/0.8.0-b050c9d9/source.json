@@ -1,6 +1,6 @@
 {
     "integrity": "sha256-dPZqpkDsW4/zFjdJFAK9i/68bgsPAG+aXY7AUAloRmk=",
-    "strip_prefix": "mini_chromium-b050c9d95bba96ff40961eefede00d365a0890d7",
+    "strip_prefix": "crashpad-b050c9d95bba96ff40961eefede00d365a0890d7",
     "url": "https://github.com/chromium/crashpad/archive/b050c9d95bba96ff40961eefede00d365a0890d7.tar.gz",
     "patch_strip": 1,
     "patches": {
