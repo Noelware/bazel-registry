@@ -23,12 +23,16 @@
     devShells = eachSystem (pkgs: {
       default = pkgs.mkShell {
         name = "noelware-bzl-registry-dev";
-        packages = with pkgs; [
-          bazel_8
-          bazel-buildtools
-          python3
-          openjdk
-        ];
+        packages = with pkgs;
+          [
+            bazel_8
+            bazel-buildtools
+            python3
+            openjdk
+          ]
+          ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+            darwin.cctools
+          ];
       };
     });
   };
