@@ -1,0 +1,17 @@
+{
+    "$schema": "https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/refs/heads/main/metadata.schema.json",
+    "homepage": "https://github.com/chromium/crashpad",
+    "maintainers": [
+        {
+            "email": "cutie@floofy.dev",
+            "github": "auguwu",
+            "name": "Noel Towa"
+        }
+    ],
+    "repository": [
+        "github:chromium/crashpad"
+    ],
+    "versions": [
+        "0.8.0-b050c9d9"
+    ]
+}

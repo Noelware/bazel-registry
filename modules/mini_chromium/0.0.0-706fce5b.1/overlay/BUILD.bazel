@@ -145,6 +145,10 @@ objc_library(
         "-Wno-unused-parameter",
         "-fobjc-arc",
     ],
+    sdk_frameworks = [
+        "CoreGraphics",
+        "CoreText",
+    ],
     target_compatible_with = ["@platforms//os:macos"],
     visibility = [":__pkg__"],
     deps = [":build_config"],

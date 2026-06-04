@@ -9,7 +9,11 @@ The following Bazel modules specified have been modified for our own use-cases, 
 | [`tomlplusplus`] | Providing knobs for TOML++-specific features like enabling pedantic C++ flags, the use of `-fno-exceptions`, and unreleased TOML features. |
 | [`cpp-httplib`]  | Occasionally bumps **cpp-httplib** to the latest version and provides Bazel 9 support |
 | [`curl`]         | Upgrading `cURL` to the latest version. As of April 1st, 2026, the `curl` Bazel Module hosted on the BCR is stuck at 8.12.0 |
+| [`mini_chromium`] | To be used with **Crashpad**. |
+| [`crashpad`] | Provides Bazel support for using Crashpad. |
 
+[`mini_chromium`]: https://chromium.googlesource.com/chromium/mini_chromium
 [`tomlplusplus`]: https://registry.bazel.build/modules/tomlplusplus
 [`cpp-httplib`]: https://registry.bazel.build/modules/cpp-httplib
+[`crashpad`]: https://chromium.googlesource.com/crashpad/crashpad
 [`curl`]: https://registry.bazel.build/modules/curl
