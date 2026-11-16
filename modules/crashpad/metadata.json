@@ -12,6 +12,7 @@
         "github:chromium/crashpad"
     ],
     "versions": [
-        "0.8.0-b050c9d9"
+        "0.8.0-b050c9d9",
+        "0.8.0-f3769d9"
     ]
 }
