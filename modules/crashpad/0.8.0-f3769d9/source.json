@@ -9,7 +9,7 @@
     },
     "overlay": {
         "BUILD.bazel": "sha256-1pfrHq7f1UHCo1OetN4isMGaZIkYhWJ/yTmpho8ECB4=",
-        "MODULE.bazel": "sha256-31aFXuH6heq147APnu/unRls4HRKvMW76IcfMgkA4cA=",
+        "MODULE.bazel": "sha256-j/JTYy+oBDohX/L0veik6KIbmmIh+numwnz++wB6zTE=",
         "build/BUILD.bazel": "sha256-Swc7fxqnbxat54s6uY+mg8u+O5hXsR74B0vldb4sH/I=",
         "build/cc.bzl": "sha256-nT7PYJzII2D9SYGe4qTWEQq5E3JQEK2PGVlAKdlttLk=",
         "build/mig/BUILD.bazel": "sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=",

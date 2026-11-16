@@ -18,6 +18,9 @@ bazel_dep(name = "package_metadata", version = "0.0.15")
 lss = use_extension("//third_party/lss:extension.bzl", "lss")
 use_repo(lss, "lss")
 
+# Force `libpfm` dependency to be `4.13.0`. This is required by `google_benchmark` for `boringssl`.
+bazel_dep(name = "libpfm", version = "4.13.0")
+
 macos_sdk = use_repo_rule("//build/mig:sdk.bzl", "mig_macos_sdk")
 
 macos_sdk(name = "mig_macos_sdk")
