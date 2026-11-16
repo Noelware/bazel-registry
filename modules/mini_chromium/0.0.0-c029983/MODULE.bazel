@@ -1,0 +1,10 @@
+module(
+    name = "mini_chromium",
+    version = "0.0.0-c029983",
+    bazel_compatibility = [">=7.2.1"],  # for `overlay/` directory
+)
+
+bazel_dep(name = "rules_cc", version = "0.2.28")
+bazel_dep(name = "platforms", version = "1.1.0")
+bazel_dep(name = "bazel_skylib", version = "1.9.2")
+bazel_dep(name = "package_metadata", version = "0.0.15")
