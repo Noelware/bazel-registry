@@ -11,7 +11,7 @@ bazel_dep(name = "bazel_skylib", version = "1.9.2")
 bazel_dep(name = "bazel_features", version = "1.55.0")
 bazel_dep(name = "zlib", version = "1.3.2.bcr.3")
 bazel_dep(name = "mini_chromium", version = "0.0.0-c029983")
-bazel_dep(name = "googletest", version = "1.18.0.bcr.1")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
 bazel_dep(name = "boringssl", version = "0.20261105.0")
 bazel_dep(name = "package_metadata", version = "0.0.15")
 
