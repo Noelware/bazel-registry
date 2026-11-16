@@ -1,0 +1,12 @@
+{
+    "integrity": "",
+    "strip_prefix": "crashpad-f3769d9630dc028cec188263f860ea80bb0e24c9",
+    "url": "https://github.com/chromium/crashpad/archive/f3769d9630dc028cec188263f860ea80bb0e24c9.tar.gz",
+    "patch_strip": 1,
+    "patches": {
+        "0001-Fix-Linux-client-test.patch": "",
+        "0002-util-file-filesystem.h-include-stdint.h.patch": ""
+    },
+    "overlay": {
+    }
+}
