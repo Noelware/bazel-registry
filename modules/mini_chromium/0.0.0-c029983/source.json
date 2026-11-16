@@ -4,7 +4,7 @@
     "url": "https://github.com/chromium/mini_chromium/archive/c029983310e7b806aa4c75463d3a013c9558abde.tar.gz",
     "patch_strip": 0,
     "overlay": {
-        "BUILD.bazel": "sha256-GAzVchTPvIWYe/jS9BBRXoQr+vP1gOQdYEFUnhfCjXU=",
+        "BUILD.bazel": "sha256-n4QXsx+S/Yi28fXW7FgtxRZAFig58FUt1XTAdebeqzk=",
         "MODULE.bazel": "sha256-BM7Msc3uozfR0HBVYmRo56ND9PxOZim5Z20DZr/lErs="
     }
 }
